@@ -42,4 +42,16 @@ public class AgamaService {
     public void delete(List<Agama> list){
         this.repo.delete(list);
     }
+    
+    public Agama findByName(String param){
+        return this.repo.findByNama(param);
+    }
+    
+    public List<Agama> findyByNameAndDescription(String nama, String deskripsi){
+        return this.repo.findByNamaOrDeskripsi(nama, deskripsi);
+    }
+    @Transactional(readOnly = false)
+    public void updateById(String id, String nama, String description){
+        this.repo.updateNamaDanDescription(id, nama, description);
+    }
 }
