@@ -2,11 +2,15 @@ package com.tabeldata.bpr;
 
 import com.tabeldata.bpr.entity.master.Agama;
 import com.tabeldata.bpr.entity.master.KotaKabupaten;
+import com.tabeldata.bpr.entity.master.Nasabah;
+import com.tabeldata.bpr.entity.master.NasabahBadanUsaha;
+import com.tabeldata.bpr.entity.master.NasabahPerorangan;
 import com.tabeldata.bpr.entity.master.Pendidikan;
 import com.tabeldata.bpr.entity.master.Provinsi;
 import com.tabeldata.bpr.entity.master.RoleSecurity;
 import com.tabeldata.bpr.entity.master.UserSecurity;
 import com.tabeldata.bpr.service.AgamaService;
+import com.tabeldata.bpr.service.NasabahService;
 import com.tabeldata.bpr.service.PendidikanService;
 import com.tabeldata.bpr.service.UserService;
 import com.tabeldata.bpr.service.WilayahService;
@@ -38,6 +42,9 @@ public class AplikasiBprApplicationTests extends TestCase {
     
     @Autowired
     private UserService userservice;
+    
+    @Autowired
+    private NasabahService nasabahservice;
     
     @Test
     public void contextLoads() {
@@ -112,6 +119,28 @@ public class AplikasiBprApplicationTests extends TestCase {
         assertNotNull(dimas);
         assertEquals(1, dimas.getListRole().size());
     }
-    
+    @Test
+    public void testSimpanNasabah(){
+        NasabahPerorangan dimas = new NasabahPerorangan();
+        dimas.setNama("Dimas Maryanto");
+        dimas.setJeniskelamin("L");
+        dimas.setNomoridentitas("6212423408234");
+        dimas.setAlamat("Jl. Bukit indah no B8");
+        dimas = this.nasabahservice.save(dimas);
+        assertNotNull(dimas.getId());
+
+        dimas = this.nasabahservice.findPeroranganById(dimas.getId());
+        assertNotNull(dimas);
+        Nasabah bukan = this.nasabahservice.findBadanUsahaById(dimas.getId());
+        assertNull(bukan);
+
+        NasabahBadanUsaha tabeldata = new NasabahBadanUsaha();
+        tabeldata.setNama("Tabel Data Informatika");
+        tabeldata.setNomornpwp("1242421423");
+        tabeldata.setAlamat("Jl. margawangi raya no 8");
+        tabeldata = this.nasabahservice.save(tabeldata);
+        assertNotNull(tabeldata.getId());
+//        this.nasabahService.delete(tabeldata);
+    }
 
 }
