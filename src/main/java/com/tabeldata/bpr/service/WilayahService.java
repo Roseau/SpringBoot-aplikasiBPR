@@ -37,4 +37,5 @@ public class WilayahService {
     public Provinsi findProvById(String id){
         return this.provrepo.findById(id);
     }
+    
 }
