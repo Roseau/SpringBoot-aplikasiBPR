@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -37,12 +39,30 @@ public class AgamaController {
         params.addAttribute("agama", agama);
         return "pages/agama/form";
     }
-    @PostMapping("/submit")
-   public String submitAgama(@ModelAttribute Agama agama) {
+    @GetMapping("/form/{id}")
+    public String updateAgama(@PathVariable("id") String id, ModelMap params, RedirectAttributes redirect){
+        Agama agama = agamaservice.findById(id);
+        if(agama!=null){
+            params.addAttribute("agama", agama);
+            return "/pages/agama/form";
+        }else{
+            redirect.addFlashAttribute("tidakAda","data tidak ditemukan!");
+            return "redirect:/agama/list";
+        }
+    } 
+   @PostMapping("/submit")
+   public String submitAgama(@ModelAttribute Agama agama, RedirectAttributes redirect) {
         agama.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
         agama.setCreatedBy("admin");
         agamaservice.save(agama);
+        redirect.addFlashAttribute("submitBerhasil", "Data Berhasil Dimasukkan!");
         return "redirect:/agama/list";
     }
+   @GetMapping("/hapus/{id}")
+   public String deleteAgama(@PathVariable("id") String KodeAgama, RedirectAttributes redirect){
+       agamaservice.delete(KodeAgama);
+       redirect.addFlashAttribute("HapusBerhasil","data berhasil dihapus!");
+       return "redirect:/agama/list";
+   }
     
 }

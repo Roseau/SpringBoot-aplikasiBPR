@@ -15,6 +15,9 @@ and open the template in the editor.
     </head>
     <body>
         <section layout:fragment="content" class="container">
+            <div class="alert alert-danger" th:if="${tidakAda}!= null" th:text="${tidakAda}"></div>
+            <div class="alert alert-danger" th:if="${HapusBerhasil}!=null" th:text="${HapusBerhasil}"></div>
+            <div class="alert alert-danger" th:if="${submitBerhasil}!=null" th:text="${submitBerhasil}"></div>
             <h1>List Agama</h1>
             <hr/>
             <a href="/agama/formaslkfjasdf" th:href="@{/agama/form}" class="btn btn-success">Tambah data</a>
@@ -36,7 +39,10 @@ and open the template in the editor.
             <td th:text="${agama.deskripsi}">Islam</td>
             <td th:text="${agama.createdDate}">2018-02-15 16:10</td>
             <td th:text="${agama.createdBy}">hardcode</td>
-            <td>-</td>
+            <td>
+                <a href="#" th:href="@{'/agama/hapus/'+${agama.id}}" class="btn btn-danger">Hapus</a>
+                <a href="#" th:href="@{'/agama/form/'+${agama.id}}" class="btn btn-success">Edit</a>
+            </td>
         </tr>
         </tbody>
     </table>
