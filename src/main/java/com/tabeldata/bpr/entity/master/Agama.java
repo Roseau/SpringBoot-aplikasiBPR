@@ -11,10 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -33,6 +36,9 @@ public class Agama {
     @Column(name = "kode_agama")
     private String id;
     
+    @NotNull(message = "Tidak Boleh KOSONG!")
+    @NotEmpty(message = "Tidak Boleh Sting Kosong")
+    @Size(min = 5, max = 50, message = "Deskipsi haus benilai antara 5 hingga 50 kaakter")
     @Column(name = "nama_agama", nullable = false, unique = true, length = 50)
     private String nama;
     

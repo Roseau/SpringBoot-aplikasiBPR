@@ -9,9 +9,11 @@ import com.tabeldata.bpr.entity.master.Agama;
 import com.tabeldata.bpr.service.AgamaService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,9 +53,12 @@ public class AgamaController {
         }
     } 
    @PostMapping("/submit")
-   public String submitAgama(@ModelAttribute Agama agama, RedirectAttributes redirect) {
+   public String submitAgama(@Valid @ModelAttribute Agama agama, BindingResult bindingresult ,RedirectAttributes redirect) {
         agama.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
         agama.setCreatedBy("admin");
+        if(bindingresult.hasErrors()){
+            return "/pages/agama/form";
+        }
         agamaservice.save(agama);
         redirect.addFlashAttribute("submitBerhasil", "Data Berhasil Dimasukkan!");
         return "redirect:/agama/list";

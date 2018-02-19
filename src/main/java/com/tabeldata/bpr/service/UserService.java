@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author St0rm
  */
 @Repository
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class UserService {
     @Autowired
     private UserRepository userepository;
@@ -36,5 +36,11 @@ public class UserService {
     
     public UserSecurity findUserByName(String nama){
         return this.userepository.findByName(nama);
+    }
+    public void Save(UserSecurity user){
+        userepository.save(user);
+    }
+    public void Delete(String userid){
+        userepository.delete(userid);
     }
 }
