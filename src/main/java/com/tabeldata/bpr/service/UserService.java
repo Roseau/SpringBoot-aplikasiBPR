@@ -43,4 +43,7 @@ public class UserService {
     public void Delete(String userid){
         userepository.delete(userid);
     }
+    public UserSecurity finduserById(String id){
+        return userepository.findById(id);
+    }
 }

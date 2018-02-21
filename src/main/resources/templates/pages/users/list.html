@@ -14,6 +14,16 @@ and open the template in the editor.
     </head>
     <body>
         <section layout:fragment="content" class="container">
+            <div class="alert alert-danger alert-dismissible" th:if="${notAvailabel} != null" th:text="${notAvailabel}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+            </div>
+            <div class="alert alert-success alert-dismissible" th:if="${alertSuccess} != null" th:text="${alertSuccess}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <h1>List Users</h1>
             <hr/>
             <a href="/agama/formaslkfjasdf" th:href="@{/users/form}" class="btn btn-success">Tambah data</a>
@@ -32,13 +42,16 @@ and open the template in the editor.
         </tr>
     </thead>
     <tbody>
-        <tr th:each="user : ${listUsers}">
-            <td th:text="${user.id}"></td>
+        <tr th:each="user , itrStat : ${listUsers}">
+            <td th:text="${itrStat.count}"></td>
             <td th:text="${user.namaLengkap}"></td>
             <td th:text="${user.biodata}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.password}"></td>
-            <td th:text="${user.active}"></td>
+            <td>
+                <span th:if="${user.active} == true" class="fa fa-check"></span>
+                <span th:if="${user.active} == false" class="fa fa-times"></span>
+            </td>
             <td th:text="${user.createdBy}"></td>
             <td th:text="${user.createDate}"></td>
             <td>

@@ -18,4 +18,5 @@ public interface UserRepository extends CrudRepository<UserSecurity, String> {
     List<UserSecurity> findAll();
     
     UserSecurity findByName(String username);
+    UserSecurity findById(String id);
 }

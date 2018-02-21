@@ -35,25 +35,43 @@ public class UserController {
     @GetMapping(value = {"/","/list"})
     public String listUsers(ModelMap user){
         user.addAttribute("listUsers", userservice.getAllUser());
+        user.addAttribute("listRole", userservice.getAllRoles());
         return "pages/users/list";
     }
     @GetMapping("/form")
     public String formUser(UserSecurity user, ModelMap params){
         params.addAttribute("user", user);
+        params.addAttribute("listRole", userservice.getAllRoles());
         return "pages/users/form";
     }
    @PostMapping("/submit")
-   public String submitUser(@Valid @ModelAttribute UserSecurity user, BindingResult bindingresult ,RedirectAttributes redirect) {
-        user.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
-        user.setCreatedBy("admin");
-        userservice.Save(user);
+   public String submitUser(@Valid @ModelAttribute UserSecurity userSecurity, BindingResult bindingresult ,RedirectAttributes redirect, ModelMap params) {
+        userSecurity.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
+        userSecurity.setCreatedBy("admin");
+        if(bindingresult.hasErrors()){
+            params.addAttribute("listRole", userservice.getAllRoles());
+            return "/pages/users/form";
+        }
+        userservice.Save(userSecurity);
         redirect.addFlashAttribute("submitBerhasil", "Data Berhasil Dimasukkan!");
         return "redirect:/users/list";
    }
    @GetMapping("/hapus/{id}")
-   public String deleteAgama(@PathVariable("id") String KodeUser, RedirectAttributes redirect){
+   public String deleteUser(@PathVariable("id") String KodeUser, RedirectAttributes redirect){
        userservice.Delete(KodeUser);
        redirect.addFlashAttribute("HapusBerhasil","data berhasil dihapus!");
        return "redirect:/users/list";
    }
+   @GetMapping("/form/{id}")
+    public String updateUser(@PathVariable("id") String id, ModelMap params, RedirectAttributes redirect){
+        UserSecurity user = userservice.finduserById(id);
+        if(user!=null){
+            params.addAttribute("user", user);
+            params.addAttribute("listRole", userservice.getAllRoles());
+            return "/pages/users/form";
+        }else{
+            redirect.addFlashAttribute("tidakAda","data tidak ditemukan!");
+            return "redirect:/users/list";
+        }
+    }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Kota Kabupaten</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <h1>Form Kota Kabupaten</h1>
+    <form th:action="@{/provinsi/submit}" th:object="${provinsi}" th:method="post" action="/kota/submit" method="post">
+        <input type="hidden" name="kodeUser" id="kodeUser" th:field="*{id}"/>
+        <div class="form-group">
+            <label for="namaKota">Nama Provinsi</label>
+            <input type="text" id="namaProvinsi" class="form-control" name="namaProvinsi" th:field="*{nama}"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

@@ -38,4 +38,30 @@ public class WilayahService {
         return this.provrepo.findById(id);
     }
     
+    @Transactional
+    public void saveProvinsi(Provinsi prov){
+        this.provrepo.save(prov);
+    }
+    
+    @Transactional
+    public void deleteProvinsi(String id){
+        this.provrepo.delete(id);
+    }
+    
+    @Transactional
+    public void saveKota(KotaKabupaten kota){
+        this.kokabrepo.save(kota);
+    }
+    @Transactional
+    public void deleteKota(KotaKabupaten kota){
+        this.kokabrepo.delete(kota);
+    }
+    @Transactional
+    public void deleteKotaById(String id){
+        this.kokabrepo.delete(id);
+    }
+    @Transactional
+    public KotaKabupaten findKotaById(String id){
+        return this.kokabrepo.findOne(id);
+    }
 }

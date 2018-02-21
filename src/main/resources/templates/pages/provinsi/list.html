@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Daftar Provinsi</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <div class="alert alert-danger" th:if="${alertDelete} != null" th:text="${alertDelete}"></div>
+    <div class="alert alert-success" th:if="${alertSuccess} != null" th:text="${alertSuccess}"></div>
+    <h1>Daftar Provinsi</h1>
+    <hr/>
+    <a href="/agama/formaslkfjasdf" th:href="@{/provinsi/form}" class="btn btn-success">Tambah data</a>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+        <thead>
+        <tr>
+            <td>Kode</td>
+            <td>Nama Provinsi</td>
+            <td>Created Date</td>
+            <td>Created By</td>
+            <td>List Kota/Kabupaten</td>
+            <td>Hapus\Edit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prov, itrStat : ${listProvinsi}">
+            <td th:text="${itrStat.count}"></td>
+            <td th:text="${prov.nama}"></td>
+            <td th:text="${prov.createdDate}"></td>
+            <td th:text="${prov.createdBy}"></td>
+            <td>
+                <ul>
+                    <li th:each="kota : ${prov.listKotaKab}" th:text="${kota.nama}"></li>
+                </ul>
+            </td>
+            <td>
+                <a href="#" th:href="@{'/provinsi/hapus/'+${prov.id}}" class="btn btn-danger">Hapus</a>
+                <a href="#" th:href="@{'/provinsi/form/'+${prov.id}}" class="btn btn-warning">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
