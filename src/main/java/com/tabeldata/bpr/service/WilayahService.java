@@ -5,8 +5,12 @@
  */
 package com.tabeldata.bpr.service;
 
+import com.tabeldata.bpr.entity.master.Kecamatan;
+import com.tabeldata.bpr.entity.master.Kelurahan;
 import com.tabeldata.bpr.entity.master.KotaKabupaten;
 import com.tabeldata.bpr.entity.master.Provinsi;
+import com.tabeldata.bpr.repository.KecamatanRepository;
+import com.tabeldata.bpr.repository.KelurahanRepository;
 import com.tabeldata.bpr.repository.KotaKabupatenRepository;
 import com.tabeldata.bpr.repository.ProvinsiRepository;
 import java.util.List;
@@ -25,6 +29,10 @@ public class WilayahService {
     private KotaKabupatenRepository kokabrepo;
     @Autowired
     private ProvinsiRepository provrepo;
+    @Autowired
+    private KecamatanRepository kecamatanrepo;
+    @Autowired
+    private KelurahanRepository kelurahanrepo;
     
     public List<Provinsi> findAllProvinsi(){
         return this.provrepo.findAll();
@@ -63,5 +71,44 @@ public class WilayahService {
     @Transactional
     public KotaKabupaten findKotaById(String id){
         return this.kokabrepo.findOne(id);
+    }
+    
+    public List<Kecamatan> getAllKecamatan(){
+        return this.kecamatanrepo.findAll();
+    }
+    @Transactional
+    public Kecamatan getKecamatanById(long kode){
+        return this.kecamatanrepo.findOne(kode);
+    }
+    
+    public List<Kelurahan> getAllKelurahan(){
+        return this.kelurahanrepo.findAll();
+    }
+    
+    public Kecamatan getKecamatanByName(String nama){
+        return this.kecamatanrepo.findByNama(nama);
+    }
+    
+    public Kelurahan getKelurahanByName(String nama){
+        return this.kelurahanrepo.findByNama(nama);
+    }
+    public Kelurahan getKelurahanByKodepos(String kode){
+        return this.kelurahanrepo.findByKodepos(kode);
+    }
+    @Transactional
+    public void deleteKelurahan(Kelurahan kel){
+        this.kelurahanrepo.delete(kel);
+    }
+    @Transactional
+    public void saveKecamatan(Kecamatan k){
+        this.kecamatanrepo.save(k);
+    }
+    @Transactional
+    public void deleteKecamatan(long id){
+        this.kecamatanrepo.delete(id);
+    }
+    @Transactional
+    public void saveKelurahan(Kelurahan kh){
+        this.kelurahanrepo.save(kh);
     }
 }

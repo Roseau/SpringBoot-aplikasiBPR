@@ -6,11 +6,12 @@
 package com.tabeldata.bpr.repository;
 import com.tabeldata.bpr.entity.master.NasabahBadanUsaha;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 /**
  *
  * @author St0rm
  */
 public interface NasabahBadanUsahaRepo extends CrudRepository<NasabahBadanUsaha, String> {
-    
+    List<NasabahBadanUsaha> findAll(); 
 }

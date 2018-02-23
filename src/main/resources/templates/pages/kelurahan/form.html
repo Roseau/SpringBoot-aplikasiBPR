@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Kelurahan</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <h1>Form Kelurahan</h1>
+    <form th:action="@{/kelurahan/submit}" th:object="${kelurahan}" th:method="post" action="/kelurahan/submit" method="post">
+        <div class="form-group">
+            <label for="kodePos">Kode pos</label>
+            <input type="text" id="kodePos" class="form-control" name="kodePos" th:field="*{kodepos}"/>
+        </div>
+        <div class="form-group">
+            <label for="namaKota">Nama Kelurahan</label>
+            <input type="text" id="namaKelurahan" class="form-control" name="namaKelurahan" th:field="*{nama}"/>
+        </div>
+        <div class="form-group">
+            <label for="kecamatanId">Pilih Kecamatan</label>
+            <select name="kecamatanId" id="kecamatanId" th:field="*{kecamatan.id}" class="form-control">
+                <option value="" th:each="kec : ${listKecamatan}" th:value="${kec.id}"
+                        th:label="${kec.nama}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

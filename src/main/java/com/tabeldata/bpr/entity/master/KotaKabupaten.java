@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -33,6 +34,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @NoArgsConstructor
 @Entity
 @Table(name = "master_kota_kabupaten")
+@ToString(exclude = "listKecamatan")
 public class KotaKabupaten {
     
     @Id

@@ -45,7 +45,7 @@ public class Kecamatan {
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "kecamatan_wilayah_seq")
     @Column(name = "id_kecamatan", nullable = false, unique = true)
-    private int id;
+    private long id;
     
     @Column(name = "nama_kecamatan", nullable = false)
     private String nama;
@@ -55,4 +55,8 @@ public class Kecamatan {
     
     @OneToMany(mappedBy = "kecamatan")
     private List<Kelurahan> listKelurahan = new ArrayList<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "kode_kota")
+    private KotaKabupaten kotakabupaten;
 }

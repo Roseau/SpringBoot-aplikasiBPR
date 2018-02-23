@@ -21,5 +21,5 @@ create table master_kelurahan(
     kodepos character varying(255) primary key not null,
     nama_kelurahan character varying(255) not null,
     created_date timestamp not null,
-    id_kec int4 not null references master_kecamatan(id_kecamatan) 
+    id_kecamatan int4 not null references master_kecamatan(id_kecamatan) 
 );

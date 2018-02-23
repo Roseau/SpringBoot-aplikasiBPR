@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>List All Nasabah</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a th:href="@{/nasabah/perorangan/form}">Tambah Nasabah Perorangan</a></li>
+        <li class="active"><a th:href="@{/nasabah/badanusaha/form}">Tambah Nasabah Badanusaha</a></li>
+    </ul>
+    <h1>Tabel Nasabah Badanusaha</h1>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+        <thead>
+        <tr>
+            <td>Id nasabah</td>
+            <td>Nama Nasabah</td>
+            <td>Alamat Nasabah</td>
+            <td>Nomor NPWP</td>    
+            <td>Hapus\Edit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nasabahBU, itrStat : ${listBadanusaha}">
+            <td th:text="${itrStat.count}">1</td>
+            <td th:text="${nasabahBU.nama}">Bandung</td>
+            <td th:text="${nasabahBU.alamat}">Jawa Barat</td>
+            <td th:text="${nasabahBU.nomornpwp}">Jawa Barat</td>
+            <td>
+                <a href="#" th:href="@{'/nasabah/badanusaha/hapus/'+${nasabahBU.id}}" class="btn btn-danger">Hapus</a>
+                <a href="#" th:href="@{'/nasabah/badanusaha/form/'+${nasabahBU.id}}" class="btn btn-warning">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <h1>Tabel Nasabah Perorangan</h1>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+        <thead>
+        <tr>
+            <td>Id nasabah</td>
+            <td>Nama Nasabah</td>
+            <td>Alamat Nasabah</td>
+            <td>Nomor Identitas</td>
+            <td>Jenis Kelamin</td>
+            <td>Hapus\Edit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nasabahOR, itrStat : ${listPerorangan}">
+            <td th:text="${itrStat.count}">1</td>
+            <td th:text="${nasabahOR.nama}">Bandung</td>
+            <td th:text="${nasabahOR.alamat}">Jawa Barat</td>
+            <td th:text="${nasabahOR.nomoridentitas}">Jawa Barat</td>
+            <td th:text="${nasabahOR.jeniskelamin}">Jawa Barat</td>
+            <td>
+                <a href="#" th:href="@{'/nasabah/perorangan/hapus/'+${nasabahOR.id}}" class="btn btn-danger">Hapus</a>
+                <a href="#" th:href="@{'/nasabah/perorangan/form/'+${nasabahOR.id}}" class="btn btn-warning">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

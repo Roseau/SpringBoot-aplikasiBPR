@@ -11,6 +11,7 @@ import com.tabeldata.bpr.entity.master.NasabahPerorangan;
 import com.tabeldata.bpr.repository.NasabahBadanUsahaRepo;
 import com.tabeldata.bpr.repository.NasabahPeroranganRepo;
 import com.tabeldata.bpr.repository.NasabahRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,4 +57,11 @@ public class NasabahService {
     public NasabahBadanUsaha findBadanUsahaById(String id) {
         return this.nasabahbadanusaha.findOne(id);
     }
+    public List<NasabahBadanUsaha> findAllBadanUsaha(){
+        return this.nasabahbadanusaha.findAll();
+    }
+    public List<NasabahPerorangan> findAllPerorangan(){
+        return this.nasabahperorangan.findAll();
+    }
+    
 }

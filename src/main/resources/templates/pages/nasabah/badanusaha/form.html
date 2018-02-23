@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Nasabah Badanusaha</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <h1>Form Nasabah badanusaha</h1>
+    <form th:action="@{/nasabah/badanusaha/submit}" th:object="${nasabahUsaha}" th:method="post" action="/kecamatan/submit" method="post">
+        <input type="hidden" name="nasabahId" id="nasabahId" th:field="*{id}"/>
+        <div class="form-group">
+            <label for="namaBu">Nama Badanusaha</label>
+            <input type="text" id="namaBu" class="form-control" name="namaBu" th:field="*{nama}"/>
+        </div>
+        <div class="form-group">
+            <label for="alamatBu">Alamat</label>
+            <input type="text" id="alamatBu" class="form-control" name="alamatBu" th:field="*{alamat}"/>
+        </div>
+        <div class="form-group">
+            <label for="npwp">Nomor NPWP</label>
+            <input type="text" id="npwp" class="form-control" name="npwp" th:field="*{nomornpwp}"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

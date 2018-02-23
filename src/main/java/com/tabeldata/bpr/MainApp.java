@@ -6,9 +6,14 @@
 package com.tabeldata.bpr;
 
 import com.tabeldata.bpr.entity.master.Agama;
+import com.tabeldata.bpr.entity.master.Nasabah;
+import com.tabeldata.bpr.entity.master.NasabahBadanUsaha;
+import com.tabeldata.bpr.entity.master.NasabahPerorangan;
 import com.tabeldata.bpr.service.AgamaService;
+import com.tabeldata.bpr.service.NasabahService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,11 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author St0rm
  */
 public class MainApp {
-    @Autowired
-    private static AgamaService agamaService;
-    
     public static void main(String[] args) {
-        Agama islam = new Agama(null, "Islam", "Muslim", Timestamp.valueOf(LocalDateTime.now()), "admin");
-        agamaService.save(islam);
     }
 }

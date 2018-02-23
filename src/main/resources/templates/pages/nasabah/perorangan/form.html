@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Nasabah Perorangan</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <h1>Form Nasabah badanusaha</h1>
+    <form th:action="@{/nasabah/perorangan/submit}" th:object="${nasabahOrang}" th:method="post" action="/kecamatan/submit" method="post">
+        <input type="hidden" name="nasabahId" id="nasabahId" th:field="*{id}"/>
+        <div class="form-group">
+            <label for="namaBu">Nama Lengkap</label>
+            <input type="text" id="namaOr" class="form-control" name="namaBu" th:field="*{nama}"/>
+        </div>
+        <div class="form-group">
+            <label for="alamatBu">Alamat</label>
+            <input type="text" id="alamatOr" class="form-control" name="alamatBu" th:field="*{alamat}"/>
+        </div>
+        <div class="form-group">
+            <label for="npwp">Nomor Identitas</label>
+            <input type="text" id="identitas" class="form-control" name="identitas" th:field="*{nomoridentitas}"/>
+        </div>
+        <div class="form-group">
+            <label for="kelamin">Jenis Kelamin</label><br/>
+            <label class="radio-inline"><input type="radio" name="isActive" value="L" th:field="*{jeniskelamin}">Laki Laki</label>
+            <label class="radio-inline"><input type="radio" name="isActive" value="P" th:field="*{jeniskelamin}">Perempuan</label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Daftar Kecamatan</title>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <div class="alert alert-danger" th:if="${alertInput} != null" th:text="${alertInput}"></div>
+    <div class="alert alert-success" th:if="${alertSuccess} != null" th:text="${alertSuccess}"></div>
+    <h1>Daftar Kecamatan</h1>
+    <hr/>
+    <a href="/agama/formaslkfjasdf" th:href="@{/kecamatan/form}" class="btn btn-success">Tambah data</a>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+        <thead>
+        <tr>
+            <td>Kode</td>
+            <td>Nama Kecamatan</td>
+            <td>Nama Kota/Kabupaten</td>
+            <td>Created Date</td>
+            <td>List Kelurahan</td>
+            <td>Hapus\Edit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="kec, itrStat : ${listKec}">
+            <td th:text="${itrStat.count}"></td>
+            <td th:text="${kec.nama}"></td>
+            <td th:text="${kec.kotakabupaten.nama}"></td>
+            <td th:text="${kec.createdDate}"></td>
+            <td>
+                <ul>
+                    <li th:each="kelurahan : ${kec.listKelurahan}" th:text="${kelurahan.nama}"></li>
+                </ul>
+            </td>
+            <td>
+                <a href="#" th:href="@{'/kecamatan/hapus/'+${kec.id}}" class="btn btn-danger">Hapus</a>
+                <a href="#" th:href="@{'/kecamatan/form/'+${kec.id}}" class="btn btn-warning">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
